@@ -107,11 +107,11 @@ export function offsetXYFromParent(evt: {clientX: number, clientY: number}, offs
 
 export function createCSSTransform({x, y}: {x: number, y: number}): Object {
   // Replace unitless items with px
-  return {[browserPrefixToKey('transform', browserPrefix)]: 'translate(' + x + 'px,' + y + 'px)'};
+  return {[browserPrefixToKey('transform', browserPrefix)]: 'translate3d(' + x + 'px,' + y + 'px, 0)'};
 }
 
 export function createSVGTransform({x, y}: {x: number, y: number}): string {
-  return 'translate(' + x + ',' + y + ')';
+  return 'translate3d(' + x + ',' + y + ', 0)';
 }
 
 export function getTouch(e: MouseTouchEvent, identifier: number): ?{clientX: number, clientY: number} {
