@@ -56,7 +56,7 @@ describe('react-draggable', function () {
         assert(node.getAttribute('style').indexOf('touch-action: none') >= 0);
       }
       assert(node.getAttribute('style').indexOf('color: black') >= 0);
-      assert(node.getAttribute('style').indexOf(transformStyle + ': translate(0px, 0px)') >= 0);
+      assert(node.getAttribute('style').indexOf(transformStyle + ': translate3d(0px, 0px, 0px)') >= 0);
       assert(node.getAttribute('class') === 'foo react-draggable');
     });
 
@@ -90,7 +90,7 @@ describe('react-draggable', function () {
           <div
             className="react-draggable"
             style={{
-              [transformKey]: 'translate(0px, 0px)'
+              [transformKey]: 'translate3d(0px, 0px, 0px)'
             }}
             transform={null} />
         </DraggableCore>
@@ -161,7 +161,7 @@ describe('react-draggable', function () {
     });
 
     it('should throw when setting transform', function () {
-      drag = (<Draggable transform="translate(100, 100)"><span /></Draggable>);
+      drag = (<Draggable transform="translate3d(100, 100, 0)"><span /></Draggable>);
 
       TestUtils.renderIntoDocument(drag);
 
@@ -225,7 +225,7 @@ describe('react-draggable', function () {
       assert(drag.state.y === 0);
     });
 
-    it('should render with style translate() for DOM nodes', function () {
+    it('should render with style translate3d() for DOM nodes', function () {
       let dragged = false;
       drag = TestUtils.renderIntoDocument(
         <Draggable onDrag={function() { dragged = true; }}>
@@ -238,7 +238,7 @@ describe('react-draggable', function () {
 
       const style = node.getAttribute('style');
       assert(dragged === true);
-      assert(style.indexOf('transform: translate(100px, 100px);') >= 0);
+      assert(style.indexOf('transform: translate3d(100px, 100px, 0px);') >= 0);
     });
 
     it('should honor "x" axis', function () {
@@ -254,7 +254,7 @@ describe('react-draggable', function () {
 
       const style = node.getAttribute('style');
       assert(dragged === true);
-      assert(style.indexOf('transform: translate(100px, 0px);') >= 0);
+      assert(style.indexOf('transform: translate3d(100px, 0px, 0px);') >= 0);
     });
 
     it('should honor "y" axis', function () {
@@ -270,7 +270,7 @@ describe('react-draggable', function () {
 
       const style = node.getAttribute('style');
       assert(dragged === true);
-      assert(style.indexOf('transform: translate(0px, 100px);') >= 0);
+      assert(style.indexOf('transform: translate3d(0px, 100px, 0px);') >= 0);
     });
 
     it('should honor "none" axis', function () {
@@ -286,7 +286,7 @@ describe('react-draggable', function () {
 
       const style = node.getAttribute('style');
       assert(dragged === true);
-      assert(style.indexOf('transform: translate(0px, 0px);') >= 0);
+      assert(style.indexOf('transform: translate3d(0px, 0px, 0px);') >= 0);
     });
 
     it('should detect if an element is instanceof SVGElement and set state.isElementSVG to true', function() {
@@ -309,7 +309,7 @@ describe('react-draggable', function () {
       assert(drag.state.isElementSVG === false);
     });
 
-    it('should render with transform translate() for SVG nodes', function () {
+    it('should render with transform translate3d() for SVG nodes', function () {
       drag = TestUtils.renderIntoDocument(
           <Draggable>
             <svg />
@@ -320,7 +320,7 @@ describe('react-draggable', function () {
       simulateMovementFromTo(drag, 0, 0, 100, 100);
 
       const transform = node.getAttribute('transform');
-      assert(transform.indexOf('translate(100,100)') >= 0);
+      assert(transform.indexOf('translate3d(100,100, 0)') >= 0);
     });
 
     it('should add and remove user-select styles', function () {
@@ -393,7 +393,7 @@ describe('react-draggable', function () {
 
         const style = node.getAttribute('style');
         assert(dragged === true);
-        assert(style.indexOf('transform: translate(100px, 100px);') >= 0);
+        assert(style.indexOf('transform: translate3d(100px, 100px, 0px);') >= 0);
 
         renderRoot.parentNode.removeChild(renderRoot);
         done();
